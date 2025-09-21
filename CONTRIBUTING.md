@@ -43,7 +43,7 @@ We use `mypy` to run type checks on our code.
 To use it:
 
 ```bash
-mypy flake8_code_free-tests tests/**/*.py
+mypy flake8_code_free_tests tests/**/*.py
 ```
 
 This step is mandatory during the CI.
