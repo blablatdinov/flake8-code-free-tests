@@ -1,0 +1,6 @@
+def test_with_if():
+    condition = True
+    if condition:
+        assert True
+    else:
+        assert False
