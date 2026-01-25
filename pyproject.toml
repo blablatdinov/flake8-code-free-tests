@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025-2026 Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>
+# SPDX-License-Identifier: MIT
+
 [tool.poetry]
 name = "flake8-code-free-tests"
 description = "Flake8 plugin to enforce control-flow-free test functions"
@@ -20,7 +23,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 flake8 = ">=5.0.0"
 
 [tool.poetry.plugins."flake8.extension"]
