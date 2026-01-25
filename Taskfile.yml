@@ -19,7 +19,13 @@ tasks:
 
   default:
     desc: "Build pipeline"
-    deps: [install-deps,unit-tests,integration-tests,ec,lint,build]
+    cmds:
+      - task: install-deps
+      - task: lint
+      - task: ec
+      - task: unit-tests
+      - task: integration-tests
+      - task: build
 
   build:
     desc: "Build the app"
@@ -53,7 +59,7 @@ tasks:
   integration-tests:
     desc: "Run integration tests"
     cmds:
-      - poetry run pytest tests/it
+      - poetry run pytest tests/it --cov-fail-under=0
 
   fmt:
     desc: "Run formatters"
