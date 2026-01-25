@@ -409,7 +409,7 @@ def test_unittest_testcase_multiple_violations(plugin_run: _PLUGIN_RUN_T) -> Non
     ]))
 
     assert len(got) == 4  # if, for, while, try
-    assert any('CFT110' in msg for _, _, msg in got)  # if
-    assert any('CFT120' in msg for _, _, msg in got)  # for
-    assert any('CFT130' in msg for _, _, msg in got)  # while
-    assert any('CFT140' in msg for _, _, msg in got)  # try
+    assert 'CFT110' in got[0][2]  # if
+    assert 'CFT120' in got[1][2]  # for
+    assert 'CFT130' in got[2][2]  # while
+    assert 'CFT140' in got[3][2]  # try
