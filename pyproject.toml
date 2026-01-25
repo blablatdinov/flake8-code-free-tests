@@ -30,13 +30,12 @@ flake8 = ">=5.0.0"
 CFT = "flake8_code_free_tests.plugin:Plugin"
 
 [tool.poetry.group.dev.dependencies]
-mypy = "1.18.2"
-
+mypy = "1.19.1"
+ruff = "0.14.14"
 wemake-python-styleguide = "0.19.2"
-flake8-pytest-style = "2.1.0"
-pytest = "8.4.2"
-pytest-cov = "6.3.0"
-pytest-randomly = "3.16.0"
+pytest = "9.0.2"
+pytest-cov = "7.0.0"
+pytest-randomly = "4.0.1"
 astpretty = "3.0.0"
 
 [build-system]
