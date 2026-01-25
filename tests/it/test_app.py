@@ -44,7 +44,7 @@ def test_dependency_versions(version: tuple[str]) -> None:
         check=False,
     )
 
-    assert got.stdout.decode('utf-8').strip() == 'file.py:3:5: CFT001 test functions should not contain if statements'
+    assert got.stdout.decode('utf-8').strip() == 'file.py:3:5: CFT110 test functions should not contain if statements'
     assert got.returncode == 1
 
 
@@ -59,5 +59,5 @@ def test() -> None:
 
     assert got.returncode == 1
     assert got.stdout.decode('utf-8').strip().splitlines() == [
-        'file.py:3:5: CFT001 test functions should not contain if statements',
+        'file.py:3:5: CFT110 test functions should not contain if statements',
     ]

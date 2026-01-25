@@ -34,7 +34,6 @@ class TestControlFlowVisitor(ast.NodeVisitor):
             node.name.startswith('test_') and
             not self._is_fixture(node)
         )
-        
         if is_test_function:
             self._in_test_function = True
             self.generic_visit(node)
@@ -46,7 +45,6 @@ class TestControlFlowVisitor(ast.NodeVisitor):
         """Visit class definitions to check for unittest test methods."""
         # Check if this is a unittest TestCase class
         is_test_case = self._is_unittest_testcase(node)
-        
         if is_test_case:
             # Visit all methods in the TestCase class
             for item in node.body:
@@ -107,9 +105,9 @@ class TestControlFlowVisitor(ast.NodeVisitor):
         """Visit if statements."""
         if self._in_test_function:
             self.problems.append((
-                node.lineno, 
-                node.col_offset, 
-                'CFT001 test functions should not contain if statements'
+                node.lineno,
+                node.col_offset,
+                'CFT110 test functions should not contain if statements'
             ))
         self.generic_visit(node)
 
@@ -117,9 +115,9 @@ class TestControlFlowVisitor(ast.NodeVisitor):
         """Visit for loops."""
         if self._in_test_function:
             self.problems.append((
-                node.lineno, 
-                node.col_offset, 
-                'CFT002 test functions should not contain for loops'
+                node.lineno,
+                node.col_offset,
+                'CFT120 test functions should not contain for loops'
             ))
         self.generic_visit(node)
 
@@ -127,9 +125,9 @@ class TestControlFlowVisitor(ast.NodeVisitor):
         """Visit while loops."""
         if self._in_test_function:
             self.problems.append((
-                node.lineno, 
-                node.col_offset, 
-                'CFT003 test functions should not contain while loops'
+                node.lineno,
+                node.col_offset,
+                'CFT130 test functions should not contain while loops'
             ))
         self.generic_visit(node)
 
@@ -137,9 +135,59 @@ class TestControlFlowVisitor(ast.NodeVisitor):
         """Visit try statements."""
         if self._in_test_function:
             self.problems.append((
-                node.lineno, 
-                node.col_offset, 
-                'CFT004 test functions should not contain try/except blocks'
+                node.lineno,
+                node.col_offset,
+                'CFT140 test functions should not contain try/except blocks'
+            ))
+        self.generic_visit(node)
+
+    def visit_With(self, node: ast.With) -> None:  # noqa: N802
+        """Visit with statements."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno,
+                node.col_offset,
+                'CFT150 test functions should not contain with statements'
+            ))
+        self.generic_visit(node)
+
+    def visit_ListComp(self, node: ast.ListComp) -> None:  # noqa: N802
+        """Visit list comprehensions."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno,
+                node.col_offset,
+                'CFT210 test functions should not contain list comprehensions'
+            ))
+        self.generic_visit(node)
+
+    def visit_DictComp(self, node: ast.DictComp) -> None:  # noqa: N802
+        """Visit dict comprehensions."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno,
+                node.col_offset,
+                'CFT220 test functions should not contain dict comprehensions'
+            ))
+        self.generic_visit(node)
+
+    def visit_SetComp(self, node: ast.SetComp) -> None:  # noqa: N802
+        """Visit set comprehensions."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno,
+                node.col_offset,
+                'CFT230 test functions should not contain set comprehensions'
+            ))
+        self.generic_visit(node)
+
+    def visit_GeneratorExp(self, node: ast.GeneratorExp) -> None:  # noqa: N802
+        """Visit generator expressions."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno,
+                node.col_offset,
+                'CFT240 test functions should not contain generator comprehensions'
             ))
         self.generic_visit(node)
 

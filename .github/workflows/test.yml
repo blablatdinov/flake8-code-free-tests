@@ -45,8 +45,14 @@ jobs:
         poetry run pip install -U pip
         poetry install
 
+        sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b $HOME/.local/bin
+
+        curl -O -L -C - https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.6.0/ec-linux-amd64.tar.gz
+        tar xzf ec-linux-amd64.tar.gz -C $HOME/.local/bin
+        mv $HOME/.local/bin/bin/ec-linux-amd64 $HOME/.local/bin/ec
+
     - name: Run checks
-      run: make test
+      run: task
 
     # Upload coverage to codecov: https://codecov.io/
     - name: Upload coverage to Codecov
