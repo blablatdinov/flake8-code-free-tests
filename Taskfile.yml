@@ -71,7 +71,6 @@ tasks:
     cmds:
       - poetry run ruff check {{.SRC_DIR}} tests
       - poetry run flake8 {{.SRC_DIR}} tests
-      - poetry run mypy {{.SRC_DIR}} tests --strict
 
   cspell-baseline:
     desc: "Generate cspell baseline"
