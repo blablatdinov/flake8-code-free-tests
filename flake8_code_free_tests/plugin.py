@@ -109,7 +109,7 @@ class TestControlFlowVisitor(ast.NodeVisitor):
             self.problems.append((
                 node.lineno, 
                 node.col_offset, 
-                'CFT001 test functions should not contain if statements'
+                'CFT110 test functions should not contain if statements'
             ))
         self.generic_visit(node)
 
@@ -119,7 +119,7 @@ class TestControlFlowVisitor(ast.NodeVisitor):
             self.problems.append((
                 node.lineno, 
                 node.col_offset, 
-                'CFT002 test functions should not contain for loops'
+                'CFT120 test functions should not contain for loops'
             ))
         self.generic_visit(node)
 
@@ -129,7 +129,7 @@ class TestControlFlowVisitor(ast.NodeVisitor):
             self.problems.append((
                 node.lineno, 
                 node.col_offset, 
-                'CFT003 test functions should not contain while loops'
+                'CFT130 test functions should not contain while loops'
             ))
         self.generic_visit(node)
 
@@ -139,7 +139,57 @@ class TestControlFlowVisitor(ast.NodeVisitor):
             self.problems.append((
                 node.lineno, 
                 node.col_offset, 
-                'CFT004 test functions should not contain try/except blocks'
+                'CFT140 test functions should not contain try/except blocks'
+            ))
+        self.generic_visit(node)
+
+    def visit_With(self, node: ast.With) -> None:  # noqa: N802
+        """Visit with statements."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno, 
+                node.col_offset, 
+                'CFT150 test functions should not contain with statements'
+            ))
+        self.generic_visit(node)
+
+    def visit_ListComp(self, node: ast.ListComp) -> None:  # noqa: N802
+        """Visit list comprehensions."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno, 
+                node.col_offset, 
+                'CFT210 test functions should not contain list comprehensions'
+            ))
+        self.generic_visit(node)
+
+    def visit_DictComp(self, node: ast.DictComp) -> None:  # noqa: N802
+        """Visit dict comprehensions."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno, 
+                node.col_offset, 
+                'CFT220 test functions should not contain dict comprehensions'
+            ))
+        self.generic_visit(node)
+
+    def visit_SetComp(self, node: ast.SetComp) -> None:  # noqa: N802
+        """Visit set comprehensions."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno, 
+                node.col_offset, 
+                'CFT230 test functions should not contain set comprehensions'
+            ))
+        self.generic_visit(node)
+
+    def visit_GeneratorExp(self, node: ast.GeneratorExp) -> None:  # noqa: N802
+        """Visit generator expressions."""
+        if self._in_test_function:
+            self.problems.append((
+                node.lineno, 
+                node.col_offset, 
+                'CFT240 test functions should not contain generator comprehensions'
             ))
         self.generic_visit(node)
 

@@ -83,7 +83,7 @@ def test_test_function_with_if(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (2, 4, 'CFT001 test functions should not contain if statements'),
+        (2, 4, 'CFT110 test functions should not contain if statements'),
     ]
 
 
@@ -96,7 +96,7 @@ def test_test_function_with_for_loop(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (2, 4, 'CFT002 test functions should not contain for loops'),
+        (2, 4, 'CFT120 test functions should not contain for loops'),
     ]
 
 
@@ -109,7 +109,7 @@ def test_test_function_with_while_loop(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (2, 4, 'CFT003 test functions should not contain while loops'),
+        (2, 4, 'CFT130 test functions should not contain while loops'),
     ]
 
 
@@ -124,7 +124,7 @@ def test_test_function_with_try_except(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (2, 4, 'CFT004 test functions should not contain try/except blocks'),
+        (2, 4, 'CFT140 test functions should not contain try/except blocks'),
     ]
 
 
@@ -136,7 +136,9 @@ def test_test_function_with_with_statement(plugin_run: _PLUGIN_RUN_T) -> None:
         '        assert f is not None',
     ]))
 
-    assert not got
+    assert got == [
+        (2, 4, 'CFT150 test functions should not contain with statements'),
+    ]
 
 
 def test_test_function_with_list_comprehension(plugin_run: _PLUGIN_RUN_T) -> None:
@@ -147,7 +149,9 @@ def test_test_function_with_list_comprehension(plugin_run: _PLUGIN_RUN_T) -> Non
         '    assert len(result) == 10',
     ]))
 
-    assert not got
+    assert got == [
+        (2, 13, 'CFT210 test functions should not contain list comprehensions'),
+    ]
 
 
 def test_test_function_with_dict_comprehension(plugin_run: _PLUGIN_RUN_T) -> None:
@@ -158,7 +162,9 @@ def test_test_function_with_dict_comprehension(plugin_run: _PLUGIN_RUN_T) -> Non
         '    assert len(result) == 5',
     ]))
 
-    assert not got
+    assert got == [
+        (2, 13, 'CFT220 test functions should not contain dict comprehensions'),
+    ]
 
 
 def test_test_function_with_set_comprehension(plugin_run: _PLUGIN_RUN_T) -> None:
@@ -169,7 +175,9 @@ def test_test_function_with_set_comprehension(plugin_run: _PLUGIN_RUN_T) -> None
         '    assert len(result) == 5',
     ]))
 
-    assert not got
+    assert got == [
+        (2, 13, 'CFT230 test functions should not contain set comprehensions'),
+    ]
 
 
 def test_test_function_with_generator_expression(plugin_run: _PLUGIN_RUN_T) -> None:
@@ -180,7 +188,9 @@ def test_test_function_with_generator_expression(plugin_run: _PLUGIN_RUN_T) -> N
         '    assert sum(result) == 10',
     ]))
 
-    assert not got
+    assert got == [
+        (2, 13, 'CFT240 test functions should not contain generator comprehensions'),
+    ]
 
 
 def test_non_test_function_allowed(plugin_run: _PLUGIN_RUN_T) -> None:
@@ -209,7 +219,7 @@ def test_pytest_decorated_function(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (5, 4, 'CFT001 test functions should not contain if statements'),
+        (5, 4, 'CFT110 test functions should not contain if statements'),
     ]
 
 
@@ -222,7 +232,7 @@ def test_async_test_function(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (2, 4, 'CFT001 test functions should not contain if statements'),
+        (2, 4, 'CFT110 test functions should not contain if statements'),
     ]
 
 
@@ -240,11 +250,12 @@ def test_multiple_violations(plugin_run: _PLUGIN_RUN_T) -> None:
         '                    pass',
     ]))
 
-    assert len(got) == 4  # if, for, while, try
-    assert any('CFT001' in msg for _, _, msg in got)  # if
-    assert any('CFT002' in msg for _, _, msg in got)  # for
-    assert any('CFT003' in msg for _, _, msg in got)  # while
-    assert any('CFT004' in msg for _, _, msg in got)  # try
+    assert len(got) == 5  # if, for, while, try, with
+    assert any('CFT110' in msg for _, _, msg in got)  # if
+    assert any('CFT120' in msg for _, _, msg in got)  # for
+    assert any('CFT130' in msg for _, _, msg in got)  # while
+    assert any('CFT140' in msg for _, _, msg in got)  # try
+    assert any('CFT150' in msg for _, _, msg in got)  # with
 
 
 def test_unittest_testcase_with_if(plugin_run: _PLUGIN_RUN_T) -> None:
@@ -262,7 +273,7 @@ def test_unittest_testcase_with_if(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (6, 8, 'CFT001 test functions should not contain if statements'),
+        (6, 8, 'CFT110 test functions should not contain if statements'),
     ]
 
 
@@ -279,7 +290,7 @@ def test_unittest_testcase_with_for(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (6, 8, 'CFT002 test functions should not contain for loops'),
+        (6, 8, 'CFT120 test functions should not contain for loops'),
     ]
 
 
@@ -296,7 +307,7 @@ def test_unittest_testcase_with_while(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (6, 8, 'CFT003 test functions should not contain while loops'),
+        (6, 8, 'CFT130 test functions should not contain while loops'),
     ]
 
 
@@ -315,7 +326,7 @@ def test_unittest_testcase_with_try(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (6, 8, 'CFT004 test functions should not contain try/except blocks'),
+        (6, 8, 'CFT140 test functions should not contain try/except blocks'),
     ]
 
 
@@ -376,7 +387,7 @@ def test_unittest_testcase_import_variations(plugin_run: _PLUGIN_RUN_T) -> None:
     ]))
 
     assert got == [
-        (6, 8, 'CFT001 test functions should not contain if statements'),
+        (6, 8, 'CFT110 test functions should not contain if statements'),
     ]
 
 
@@ -398,7 +409,7 @@ def test_unittest_testcase_multiple_violations(plugin_run: _PLUGIN_RUN_T) -> Non
     ]))
 
     assert len(got) == 4  # if, for, while, try
-    assert any('CFT001' in msg for _, _, msg in got)  # if
-    assert any('CFT002' in msg for _, _, msg in got)  # for
-    assert any('CFT003' in msg for _, _, msg in got)  # while
-    assert any('CFT004' in msg for _, _, msg in got)  # try
+    assert any('CFT110' in msg for _, _, msg in got)  # if
+    assert any('CFT120' in msg for _, _, msg in got)  # for
+    assert any('CFT130' in msg for _, _, msg in got)  # while
+    assert any('CFT140' in msg for _, _, msg in got)  # try

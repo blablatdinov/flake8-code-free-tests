@@ -56,15 +56,16 @@ def test_user_creation():
 
 The plugin reports the following error codes:
 
-- `CFT001`: test functions should not contain if statements
-- `CFT002`: test functions should not contain for loops
-- `CFT003`: test functions should not contain while loops
-- `CFT004`: test functions should not contain try/except blocks
-- `CFT005`: test functions should not contain with statements
-- `CFT006`: test functions should not contain list comprehensions
-- `CFT007`: test functions should not contain dict comprehensions
-- `CFT008`: test functions should not contain set comprehensions
-- `CFT009`: test functions should not contain generator expressions
+- `CFT110`: test functions should not contain if statements
+- `CFT120`: test functions should not contain for loops
+- `CFT130`: test functions should not contain while loops
+- `CFT140`: test functions should not contain try/except blocks
+- `CFT150`: test functions should not contain with statements
+- `CFT210`: test functions should not contain list comprehensions
+- `CFT220`: test functions should not contain dict comprehensions
+- `CFT230`: test functions should not contain set comprehensions
+- `CFT240`: test functions should not contain generator comprehensions
+
 
 ## Rationale
 
