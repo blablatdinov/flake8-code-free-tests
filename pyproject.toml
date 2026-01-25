@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025-2026 Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>
+# SPDX-License-Identifier: MIT
+
 [tool.poetry]
 name = "flake8-code-free-tests"
 description = "Flake8 plugin to enforce control-flow-free test functions"
@@ -20,20 +23,19 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-flake8 = ">=5.0.0"
+python = "^3.10"
+flake8 = "^7.1"
 
 [tool.poetry.plugins."flake8.extension"]
 CFT = "flake8_code_free_tests.plugin:Plugin"
 
 [tool.poetry.group.dev.dependencies]
-mypy = "1.18.2"
-
-wemake-python-styleguide = "0.19.2"
-flake8-pytest-style = "2.1.0"
-pytest = "8.4.2"
-pytest-cov = "6.3.0"
-pytest-randomly = "3.16.0"
+mypy = "1.19.1"
+ruff = "0.14.14"
+wemake-python-styleguide = "1.5.0"
+pytest = "9.0.2"
+pytest-cov = "7.0.0"
+pytest-randomly = "4.0.1"
 astpretty = "3.0.0"
 
 [build-system]
