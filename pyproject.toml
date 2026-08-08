@@ -30,7 +30,7 @@ flake8 = "^7.1"
 CFT = "flake8_code_free_tests.plugin:Plugin"
 
 [tool.poetry.group.dev.dependencies]
-mypy = "1.19.1"
+mypy = "1.20.2"
 ruff = "0.14.14"
 wemake-python-styleguide = "1.5.0"
 pytest = "9.0.2"
